@@ -6,6 +6,6 @@ export default class Messenger{
   }
 
   showMessage(): string {
-    return `Node & Express running on port ${this.port} with typescript1`;
+    return `Node & Express running on port ${this.port} with typescript`;
   }
 }

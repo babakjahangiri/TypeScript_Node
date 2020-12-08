@@ -3,11 +3,12 @@ import * as bodyParser from 'body-parser';
 import routes from "./src/routes/crmRoutes";
 import connection from './conn';
 import messenger from './src/controllers/createMessage';
+import { Settings } from './settings';
+
 require('dotenv').config();
 
 const app = express();
-const PORT: number= 5000;
-let messages = new messenger(PORT);
+let messages = new messenger(Settings.PORT);
 
 connection();
 
@@ -22,6 +23,6 @@ app.get('/',(req,res) => {
   res.send(messages.showMessage())
 })
 
-app.listen(PORT, () =>
+app.listen(Settings.PORT, () =>
   console.log(messages.showMessage())
 );
