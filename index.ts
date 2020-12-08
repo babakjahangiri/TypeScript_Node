@@ -1,11 +1,13 @@
 import * as express from "express";
 import * as bodyParser from 'body-parser';
 import routes from "./src/routes/crmRoutes";
-import connection from './conn'
-require('dotenv').config()
+import connection from './conn';
+import messenger from './src/controllers/createMessage';
+require('dotenv').config();
 
 const app = express();
-const PORT = 5000;
+const PORT: number= 5000;
+let messages = new messenger(PORT);
 
 connection();
 
@@ -13,13 +15,13 @@ connection();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-
 routes(app);
 
+
 app.get('/',(req,res) => {
-  res.send(`Node & Express running on port ${PORT} with typescript`)
+  res.send(messages.showMessage())
 })
 
 app.listen(PORT, () =>
-  console.log(`Server is running on port ${PORT}`)
+  console.log(messages.showMessage())
 );
